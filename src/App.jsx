@@ -5,12 +5,28 @@ import Home from "../src/Pages/Home";
 import Login from "../src/Pages/Login";
 import Register from "../src/Pages/Register";
 import ProductList from "../src/Pages/ProductList";
+
 import Payments from "./Pages/Payments";
 import About from "./Pages/About";
+import Cart from "./Pages/Cart";
+import OrdersPage from "./pages/OrdersPage";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../src/features/cart/cartSlice";
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handler = () => {
+      dispatch(clearCart());
+    };
+
+    window.addEventListener("clearCart", handler);
+    return () => window.removeEventListener("clearCart", handler);
+  }, [dispatch]);
+
   return (
     <Router>
       <Navbar />
@@ -21,6 +37,8 @@ function App() {
         <Route path="/products" element={<ProductList />} />
         <Route path="/about" element={<About />} />
         <Route path="/Payments" element={<Payments />} />
+        <Route path="/Cart" element={<Cart />} />
+        <Route path="/orders" element={<OrdersPage />} />
       </Routes>
       <Footer />
     </Router>

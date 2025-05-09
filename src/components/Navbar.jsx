@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AppBar } from "@mui/material";
 import { Link } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +44,7 @@ function Navbar() {
               { label: "Home", to: "/" },
               { label: "About", to: "/About" },
               { label: "Products", to: "/products" },
-              { label: "Payments", to: "/Payments" },
+              { label: "Orders", to: "/Orders" },
             ].map((item, index) => (
               <li className="nav-item" key={index}>
                 <Link
@@ -62,6 +63,19 @@ function Navbar() {
           </ul>
 
           <ul className="navbar-nav gap-3">
+            <li className="nav-item">
+              <Link
+                className="nav-link text-white fw-semibold"
+                to="/Cart"
+                onClick={() => setIsOpen(false)}
+                style={{
+                  fontSize: "1.05rem",
+                  transition: "0.3s",
+                }}
+              >
+                <ShoppingCartIcon />
+              </Link>
+            </li>
             <li className="nav-item">
               <Link
                 className="nav-link text-white fw-semibold"

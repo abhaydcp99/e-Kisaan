@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/cart/cartSlice";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import { useEffect } from "react";
 
 const dummyProducts = [
   {
@@ -23,8 +28,51 @@ const dummyProducts = [
 ];
 
 function ProductList() {
+  const dispatch = useDispatch();
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleAddToCart = (product) => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+      })
+    );
+    setOpenSnackBar(true);
+  };
+
+  const handleClose = () => {
+    setOpenSnackBar(false);
+  };
+
   return (
     <div className="container mt-5">
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <MuiAlert
+          onClose={handleClose}
+          severity="success"
+          sx={{
+            width: "100%",
+            backgroundColor: "#102E50",
+            color: "white",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          Added to Cart
+        </MuiAlert>
+      </Snackbar>
+
       <h2
         className="text-center mb-4"
         style={{ color: "#2e7d32", fontWeight: "bold" }}
@@ -63,7 +111,10 @@ function ProductList() {
                   ₹{product.price}/kg
                 </span>
                 <br />
-                <button className="btn btn-outline-success px-4 fw-semibold">
+                <button
+                  className="btn btn-outline-success px-4 fw-semibold"
+                  onClick={() => handleAddToCart(product)}
+                >
                   Add to Cart
                 </button>
               </div>

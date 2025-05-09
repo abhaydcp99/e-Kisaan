@@ -1,13 +1,15 @@
 import {
-  Button,
   Card,
-  CardMedia,
+  Avatar,
   CardContent,
   Typography,
   Stack,
   Box,
   Container,
+  IconButton,
 } from "@mui/material";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 const Aboutus = () => {
   return (
@@ -48,47 +50,81 @@ const Aboutus = () => {
           {/* Team Member 1 */}
           <Card
             sx={{
-              width: 300,
-              borderRadius: 3,
+              width: 250,
+              borderRadius: "15px",
               boxShadow: 4,
+              textAlign: "center",
               transition: "transform 0.3s",
               "&:hover": { transform: "scale(1.05)" },
+              padding: 2,
             }}
           >
-            <CardMedia
-              component="img"
-              height="180"
-              image="src/assets/Abhay.jpeg"
+            <Avatar
               alt="Abhay Chavan"
+              src="src/assets/Abhay.jpeg"
+              sx={{
+                width: 120,
+                height: 120,
+                margin: "0 auto",
+                border: "4px solid #fff",
+                boxShadow: 3,
+              }}
             />
             <CardContent>
-              <Typography variant="h5" fontWeight="bold">
+              <Typography variant="h6" fontWeight="bold" sx={{ mt: 2 }}>
                 ABHAY CHAVAN
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 FRONTEND
               </Typography>
+              <Stack direction="row" spacing={2} justifyContent="center" mt={1}>
+                <IconButton
+                  component="a"
+                  href="https://www.linkedin.com/in/abhay-dcp-/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  color="primary"
+                >
+                  <LinkedInIcon />
+                </IconButton>
+                <IconButton
+                  component="a"
+                  href="https://github.com/abhaydcp99"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  color="inherit"
+                >
+                  <GitHubIcon />
+                </IconButton>
+              </Stack>
             </CardContent>
           </Card>
 
           {/* Team Member 2 */}
           <Card
             sx={{
-              width: 300,
-              borderRadius: 3,
+              width: 250,
+              borderRadius: "15px",
               boxShadow: 4,
+              textAlign: "center",
               transition: "transform 0.3s",
               "&:hover": { transform: "scale(1.05)" },
+              padding: 2,
             }}
           >
-            <CardMedia
-              component="img"
-              height="180"
-              image="/src/assets/vegetable.jpg"
+            <Avatar
               alt="Adwait Gunjal"
+              src="/src/assets/vegetable.jpg"
+              sx={{
+                width: 120,
+                height: 120,
+                margin: "0 auto",
+                border: "4px solid #fff",
+                boxShadow: 3,
+              }}
             />
             <CardContent>
-              <Typography variant="h5" fontWeight="bold">
+              <Typography variant="h6" fontWeight="bold" sx={{ mt: 2 }}>
                 ADWAIT GUNJAL
               </Typography>
               <Typography variant="body2" color="text.secondary">
@@ -100,21 +136,28 @@ const Aboutus = () => {
           {/* Team Member 3 */}
           <Card
             sx={{
-              width: 300,
-              borderRadius: 3,
+              width: 250,
+              borderRadius: "15px",
               boxShadow: 4,
+              textAlign: "center",
               transition: "transform 0.3s",
               "&:hover": { transform: "scale(1.05)" },
+              padding: 2,
             }}
           >
-            <CardMedia
-              component="img"
-              height="180"
-              image="/src/assets/Project.jpeg"
+            <Avatar
               alt="Amrutha Nayak"
+              src="/src/assets/Project.jpeg"
+              sx={{
+                width: 120,
+                height: 120,
+                margin: "0 auto",
+                border: "4px solid #fff",
+                boxShadow: 3,
+              }}
             />
             <CardContent>
-              <Typography variant="h5" fontWeight="bold">
+              <Typography variant="h6" fontWeight="bold" sx={{ mt: 2 }}>
                 AMRUTHA NAYAK
               </Typography>
               <Typography variant="body2" color="text.secondary">

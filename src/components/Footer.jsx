@@ -62,10 +62,10 @@ function Footer() {
             </li>
             <li>
               <a
-                href="/Payments"
+                href="/Cart"
                 style={{ color: "white", textDecoration: "none" }}
               >
-                Payments
+                Cart
               </a>
             </li>
           </ul>

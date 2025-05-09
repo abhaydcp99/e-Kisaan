@@ -5,8 +5,31 @@ function Register() {
     name: "",
     email: "",
     password: "",
+    mobile: "",
     userType: "customer",
   });
+
+  const [error, setError] = useState("");
+
+  const validateForm = () => {
+    const { name, email, password, mobile } = formData;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mobileRegex = /^[0-9]{10}$/;
+
+    if (name.trim().length === 0) {
+      return "Name cannot be empty";
+    }
+    if (!emailRegex.test(email)) {
+      return "Invalid email format";
+    }
+    if (password.length < 6) {
+      return "Password must be at least 6 characters";
+    }
+    if (!mobileRegex.test(mobile)) {
+      return "Mobile must be a 10-digit number";
+    }
+    return "";
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,6 +37,13 @@ function Register() {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setError("");
     alert(`Registering user: ${formData.name}`);
   };
 
@@ -42,6 +72,7 @@ function Register() {
         <h5 className="text-center text-muted mb-4">Create Your Account</h5>
 
         <form onSubmit={handleRegister}>
+          {error && <p className="text-danger text-center">{error}</p>}
           <input
             className="form-control mb-3"
             name="name"
@@ -69,15 +100,16 @@ function Register() {
             onChange={handleChange}
             required
           />
-          <select
-            className="form-control mb-4"
-            name="userType"
-            value={formData.userType}
+          <input
+            className="form-control mb-3"
+            name="mobile"
+            type="tel"
+            placeholder="Mobile"
+            value={formData.mobile}
             onChange={handleChange}
-          >
-            <option value="customer">Customer</option>
-            <option value="farmer">Farmer</option>
-          </select>
+            required
+          />
+
           <button className="btn btn-success w-100" type="submit">
             Register
           </button>

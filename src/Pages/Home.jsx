@@ -1,7 +1,14 @@
+import React, { useRef } from "react";
 import { Button, Container, Box, Typography } from "@mui/material";
 import Products from "../components/Products";
 
 function Home() {
+  const productsRef = useRef(null); // Step 1
+
+  const handleScrollToProducts = () => {
+    productsRef.current?.scrollIntoView({ behavior: "smooth" }); // Step 3
+  };
+
   return (
     <Box sx={{ position: "relative", overflow: "hidden" }}>
       {/* Background Video */}
@@ -16,7 +23,6 @@ function Home() {
           left: 0,
           minWidth: "100%",
           minHeight: "100%",
-
           objectFit: "contain",
           zIndex: -1,
         }}
@@ -54,13 +60,14 @@ function Home() {
             py: 1,
             "&:hover": { backgroundColor: "#1b5e20" },
           }}
+          onClick={handleScrollToProducts} // Step 3
         >
           See What’s Fresh
         </Button>
       </Box>
 
       {/* Products Section */}
-      <Box sx={{ position: "relative", zIndex: 1, mt: 5 }}>
+      <Box ref={productsRef} sx={{ position: "relative", zIndex: 1, mt: 5 }}>
         <Products />
       </Box>
     </Box>

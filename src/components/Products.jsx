@@ -9,6 +9,10 @@ import {
   Container,
 } from "@mui/material";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 const productData = [
   {
@@ -38,6 +42,10 @@ const productData = [
 ];
 
 const Products = () => {
+  const navigate = useNavigate();
+  const proceedToProducts = () => {
+    navigate("/products");
+  };
   const settings = {
     dots: true,
     infinite: true,
@@ -111,8 +119,9 @@ const Products = () => {
                       borderRadius: 2,
                       px: 2,
                     }}
+                    onClick={() => proceedToProducts()}
                   >
-                    Buy Now
+                    Explore Now
                   </Button>
                 </CardActions>
               </Card>
