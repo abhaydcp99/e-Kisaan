@@ -1,2 +1,1 @@
-# e-Kisaan
-🌾 e-Kisaan Portal is a digital platform connecting farmers with private businesses. It offers service booking, secure login, payment integration, and real-time updates to streamline agricultural operations and promote rural development.
+e-Kisaan is a full-stack web platform designed to connect local farmers directly with consumers and businesses for the sale of fresh vegetables, fruits, dairy products, and spices. It eliminates middlemen and promotes digital empowerment of farmers.
