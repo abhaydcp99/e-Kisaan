@@ -18,7 +18,7 @@ function About() {
     <Container
       fixed
       maxWidth="xl"
-      sx={{ border: "2px solid #000000", margin: "auto" }}
+      sx={{ margin: "auto" }} // ✅ Removed black border
     >
       <Aboutus />
     </Container>

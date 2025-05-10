@@ -28,12 +28,23 @@ function Login() {
 
   return (
     <div
-      className="container d-flex justify-content-center align-items-center"
-      style={{ height: "90vh" }}
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(to right, #ffffff, #e0f7fa)", // 👈 same as Register
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "2rem",
+      }}
     >
       <div
         className="card p-4 shadow-lg"
-        style={{ width: "100%", maxWidth: "400px" }}
+        style={{
+          width: "100%",
+          maxWidth: "400px",
+          background: "white",
+          borderRadius: "1rem",
+        }}
       >
         <h2 className="text-center mb-4 text-success"> e-Kisaan </h2>
         <h5 className="text-center mb-3">Login to Continue</h5>

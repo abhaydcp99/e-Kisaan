@@ -114,7 +114,7 @@ const Aboutus = () => {
           >
             <Avatar
               alt="Adwait Gunjal"
-              src="/src/assets/vegetable.jpg"
+              src="/src/assets/project1.jpeg"
               sx={{
                 width: 120,
                 height: 120,

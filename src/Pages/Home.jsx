@@ -1,12 +1,13 @@
 import React, { useRef } from "react";
 import { Button, Container, Box, Typography } from "@mui/material";
+import { motion } from "framer-motion"; // <== Import motion
 import Products from "../components/Products";
 
 function Home() {
-  const productsRef = useRef(null); // Step 1
+  const productsRef = useRef(null);
 
   const handleScrollToProducts = () => {
-    productsRef.current?.scrollIntoView({ behavior: "smooth" }); // Step 3
+    productsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -43,9 +44,17 @@ function Home() {
           backgroundColor: "rgba(0, 0, 0, 0.4)",
         }}
       >
-        <Typography variant="h2" sx={{ fontWeight: "bold", mb: 2 }}>
-          Welcome to e-Kisaan
-        </Typography>
+        {/* Animate "Welcome to e-Kisaan" */}
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <Typography variant="h2" sx={{ fontWeight: "bold", mb: 2 }}>
+            Welcome to e-Kisaan
+          </Typography>
+        </motion.div>
+
         <Typography variant="h5" sx={{ mb: 2 }}>
           Fresh and Organic Products for You
         </Typography>
@@ -60,7 +69,7 @@ function Home() {
             py: 1,
             "&:hover": { backgroundColor: "#1b5e20" },
           }}
-          onClick={handleScrollToProducts} // Step 3
+          onClick={handleScrollToProducts}
         >
           See What’s Fresh
         </Button>
