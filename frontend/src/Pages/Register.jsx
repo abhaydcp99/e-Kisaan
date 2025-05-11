@@ -1,4 +1,5 @@
 import { useState } from "react";
+import api from "../../api.js";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -9,7 +10,10 @@ function Register() {
     userType: "customer",
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); // Error state for form validation
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const validateForm = () => {
     const { name, email, password, mobile } = formData;
@@ -28,23 +32,25 @@ function Register() {
     if (!mobileRegex.test(mobile)) {
       return "Mobile must be a 10-digit number";
     }
-    return "";
+    return ""; // Return an empty string if no errors
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleRegister = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationError = validateForm();
+
+    const validationError = validateForm(); // Check if the form is valid
     if (validationError) {
-      setError(validationError);
+      setError(validationError); // Set the error state if validation fails
       return;
     }
 
-    setError("");
-    alert(`Registering user: ${formData.name}`);
+    try {
+      const res = await api.post("/auth/register", formData);
+      localStorage.setItem("token", res.data.token);
+      alert("Registration successful!");
+    } catch (err) {
+      setError(err.response?.data?.msg || "Registration failed");
+    }
   };
 
   const containerStyle = {
@@ -71,7 +77,7 @@ function Register() {
         <h2 className="text-center text-success mb-3"> e-Kisaan </h2>
         <h5 className="text-center text-muted mb-4">Create Your Account</h5>
 
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleSubmit}>
           {error && <p className="text-danger text-center">{error}</p>}
           <input
             className="form-control mb-3"

@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Home from "../src/Pages/Home";
-import Login from "../src/Pages/Login";
-import Register from "../src/Pages/Register";
-import ProductList from "../src/Pages/ProductList";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import ProductList from "./Pages/ProductList";
 
 import Payments from "./Pages/Payments";
 import About from "./Pages/About";
@@ -14,7 +14,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { clearCart } from "../src/features/cart/cartSlice";
+import { clearCart } from "./features/cart/cartSlice";
 function App() {
   const dispatch = useDispatch();
 
