@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
 import { Button, Container, Box, Typography } from "@mui/material";
-import { motion } from "framer-motion"; // <== Import motion
 import Products from "../components/Products";
+import { motion } from "framer-motion";
 
 function Home() {
   const productsRef = useRef(null);
-
+  const MotionDiv = motion.div;
+  const isAbhay = false;
   const handleScrollToProducts = () => {
     productsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -13,24 +14,25 @@ function Home() {
   return (
     <Box sx={{ position: "relative", overflow: "hidden" }}>
       {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          minWidth: "100%",
-          minHeight: "100%",
-          objectFit: "contain",
-          zIndex: -1,
-        }}
-      >
-        <source src="/src/assets/bg_vdo.mp4" type="video/mp4" />
-      </video>
-
+      {isAbhay ?? (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            minWidth: "100%",
+            minHeight: "100%",
+            objectFit: "contain",
+            zIndex: -1,
+          }}
+        >
+          <source src="/src/assets/bg_vdo.mp4" type="video/mp4" />
+        </video>
+      )}
       {/* Overlay Content */}
       <Box
         sx={{
@@ -45,7 +47,7 @@ function Home() {
         }}
       >
         {/* Animate "Welcome to e-Kisaan" */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -53,7 +55,7 @@ function Home() {
           <Typography variant="h2" sx={{ fontWeight: "bold", mb: 2 }}>
             Welcome to e-Kisaan
           </Typography>
-        </motion.div>
+        </MotionDiv>
 
         <Typography variant="h5" sx={{ mb: 2 }}>
           Fresh and Organic Products for You
