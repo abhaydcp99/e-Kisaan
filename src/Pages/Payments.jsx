@@ -57,7 +57,7 @@ function Payment() {
         return false;
       }
     } else if (paymentMethod === "upi") {
-      const upiRegex = /^[\w.\-]{2,256}@[a-zA-Z]{2,64}$/;
+      const upiRegex = /^[\w.-]{2,256}@[a-zA-Z]{2,64}$/;
       if (!upiRegex.test(upiId)) {
         alert("Invalid UPI ID format.");
         return false;

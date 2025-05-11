@@ -1,8 +1,7 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Trash2 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../features/cart/cartSlice"
+import { removeFromCart } from "../features/cart/cartSlice";
 
 const Cart = () => {
   const navigate = useNavigate(); // For redirection
