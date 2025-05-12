@@ -1,17 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Trash2 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../features/cart/cartSlice";
+import {
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../features/cart/cartSlice";
 
 const Cart = () => {
   const navigate = useNavigate(); // For redirection
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-  //   const cartItems = [
-  //     { id: 1, name: "Organic Fertilizer", quantity: 2, price: 250 },
-  //     { id: 2, name: "Hybrid Tomato Seeds", quantity: 1, price: 120 },
-  //     { id: 3, name: "Irrigation Pipe (10m)", quantity: 1, price: 600 },
-  //   ];
 
   const total = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,
@@ -52,7 +51,20 @@ const Cart = () => {
                   <div className="d-flex align-items-center">
                     ₹{item.price * item.quantity}
                     <button
-                      className="btn btn-sm btn-outline-danger ms-3"
+                      className="btn btn-sm btn-outline-secondary ms-3"
+                      onClick={() => dispatch(decreaseQuantity(item.id))}
+                      disabled={item.quantity === 1}
+                    >
+                      -
+                    </button>
+                    <button
+                      className="btn btn-sm btn-outline-success ms-2"
+                      onClick={() => dispatch(increaseQuantity(item.id))}
+                    >
+                      +
+                    </button>
+                    <button
+                      className="btn btn-sm btn-outline-danger ms-2"
                       onClick={() => dispatch(removeFromCart(item.id))}
                     >
                       <Trash2 size={16} />

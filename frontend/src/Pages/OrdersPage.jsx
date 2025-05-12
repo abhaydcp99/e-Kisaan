@@ -4,24 +4,45 @@ import { Table } from "react-bootstrap";
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [doneOrderCount, setDoneOrderCount] = useState(0);
 
-  // ✅ Step 1: Get user info from localStorage
-  const user = JSON.parse(localStorage.getItem("user")); // adjust key if needed
+  // 1: Get user info from localStorage
+  const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.id;
 
   useEffect(() => {
     if (userId) {
-      // ✅ Step 2: Fetch orders using userId
+      // 2: Fetch orders using userId
       axios
         .get(`/api/orders/${userId}`)
         .then((res) => setOrders(res.data))
         .catch((err) => console.error(err));
     }
   }, [userId]);
+
   useEffect(() => {
     const storedOrders = JSON.parse(localStorage.getItem("orders")) || [];
     setOrders(storedOrders);
   }, []);
+
+  // Calculate total amount and count of "done" orders
+  useEffect(() => {
+    if (orders.length > 0) {
+      let total = 0;
+      let doneCount = 0;
+
+      orders.forEach((order) => {
+        total += order.total_price;
+        if (order.order_status === "Done") {
+          doneCount += 1;
+        }
+      });
+
+      setTotalAmount(total);
+      setDoneOrderCount(doneCount);
+    }
+  }, [orders]);
 
   return (
     <div className="container mt-4">
@@ -34,7 +55,6 @@ const OrdersPage = () => {
             <th>Qty</th>
             <th>Total Price</th>
             <th>Ordered On</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -45,16 +65,20 @@ const OrdersPage = () => {
               <td>{order.quantity}</td>
               <td>₹{order.total_price}</td>
               <td>{new Date(order.order_date).toLocaleDateString()}</td>
-              <td>
-                <button className="btn btn-sm btn-info me-2">View</button>
-                {order.order_status === "Pending" && (
-                  <button className="btn btn-sm btn-danger">Cancel</button>
-                )}
-              </td>
             </tr>
           ))}
         </tbody>
       </Table>
+
+      {/* Display Total and Done Orders */}
+      <div className="d-flex justify-content-between mt-4">
+        <h5>Total Amount: ₹{totalAmount}</h5>
+        <h5>
+          {doneOrderCount > 0
+            ? `Orders Delivered! Thank You for Supporting e-Kisaan.`
+            : "Orders In Progress. We are working on it!"}
+        </h5>
+      </div>
     </div>
   );
 };

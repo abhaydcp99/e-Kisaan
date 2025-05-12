@@ -1,12 +1,15 @@
 import React, { useRef } from "react";
-import { Button, Container, Box, Typography } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import Products from "../components/Products";
 import { motion } from "framer-motion";
+
+import bgVideo from "../assets/bg_vdo.mp4";
 
 function Home() {
   const productsRef = useRef(null);
   const MotionDiv = motion.div;
   const isAbhay = false;
+
   const handleScrollToProducts = () => {
     productsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -14,7 +17,7 @@ function Home() {
   return (
     <Box sx={{ position: "relative", overflow: "hidden" }}>
       {/* Background Video */}
-      {isAbhay ?? (
+      {!isAbhay && (
         <video
           autoPlay
           loop
@@ -26,13 +29,15 @@ function Home() {
             left: 0,
             minWidth: "100%",
             minHeight: "100%",
-            objectFit: "contain",
+            objectFit: "cover",
             zIndex: -1,
           }}
         >
-          <source src="/src/assets/bg_vdo.mp4" type="video/mp4" />
+          <source src={bgVideo} type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
       )}
+
       {/* Overlay Content */}
       <Box
         sx={{
@@ -46,7 +51,7 @@ function Home() {
           backgroundColor: "rgba(0, 0, 0, 0.4)",
         }}
       >
-        {/* Animate "Welcome to e-Kisaan" */}
+        {/* Animated Heading */}
         <MotionDiv
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}

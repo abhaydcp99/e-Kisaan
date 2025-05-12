@@ -130,6 +130,26 @@ const Aboutus = () => {
               <Typography variant="body2" color="text.secondary">
                 BACKEND
               </Typography>
+              <Stack direction="row" spacing={2} justifyContent="center" mt={1}>
+                <IconButton
+                  component="a"
+                  href="https://www.linkedin.com/in/adwait-gunjal/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  color="primary"
+                >
+                  <LinkedInIcon />
+                </IconButton>
+                <IconButton
+                  component="a"
+                  href="https://github.com/adwaitgunjal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  color="inherit"
+                >
+                  <GitHubIcon />
+                </IconButton>
+              </Stack>
             </CardContent>
           </Card>
 
@@ -163,6 +183,26 @@ const Aboutus = () => {
               <Typography variant="body2" color="text.secondary">
                 DATABASE
               </Typography>
+              <Stack direction="row" spacing={2} justifyContent="center" mt={1}>
+                <IconButton
+                  component="a"
+                  href="https://www.linkedin.com/in/amrutha-nayak-6a0ab3200/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  color="primary"
+                >
+                  <LinkedInIcon />
+                </IconButton>
+                <IconButton
+                  component="a"
+                  href="https://github.com/Amru100420/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  color="inherit"
+                >
+                  <GitHubIcon />
+                </IconButton>
+              </Stack>
             </CardContent>
           </Card>
         </Stack>
