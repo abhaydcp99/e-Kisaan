@@ -1,15 +1,23 @@
 const express = require("express");
-const auth = require("../middleware/auth");
 const Cart = require("../models/Cart");
 const router = express.Router();
 
-router.get("/", auth, async (req, res) => {
+const DEMO_CART_ID = "demoCart123";
+async function getDemoCart() {
+  let cart = await Cart.findById(DEMO_CART_ID);
+  if (!cart) {
+    cart = new Cart({
+      _id: DEMO_CART_ID,
+      items: [],
+    });
+    await cart.save();
+  }
+  return cart;
+}
+
+router.get("/", async (req, res) => {
   try {
-    let cart = await Cart.findOne({ user: req.user.id }).populate(
-      "items.product",
-      "name price imageUrl"
-    );
-    if (!cart) return res.json({ items: [] });
+    const cart = await getDemoCart();
     res.json(cart);
   } catch (err) {
     console.error(err);
@@ -17,16 +25,16 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-router.post("/", auth, async (req, res) => {
+router.post("/", async (req, res) => {
   const { productId, qty } = req.body;
+
   if (!productId || qty == null) {
     return res.status(400).json({ msg: "productId and qty are required" });
   }
+
   try {
-    let cart = await Cart.findOne({ user: req.user.id });
-    if (!cart) {
-      cart = new Cart({ user: req.user.id, items: [] });
-    }
+    const cart = await getDemoCart();
+
     cart.items = cart.items.filter(
       (item) => item.product.toString() !== productId
     );
@@ -34,7 +42,6 @@ router.post("/", auth, async (req, res) => {
       cart.items.push({ product: productId, qty });
     }
     await cart.save();
-    cart = await cart.populate("items.product", "name price imageUrl");
     res.json(cart);
   } catch (err) {
     console.error(err);

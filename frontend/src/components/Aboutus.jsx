@@ -28,9 +28,8 @@ const Aboutus = () => {
           variant="h3"
           sx={{ fontWeight: "bold", mb: 2, color: "#2e7d32" }}
         >
-          Our Team
+          About Company
         </Typography>
-
         <Typography
           variant="h6"
           sx={{ color: "#424242", maxWidth: "900px", mx: "auto", mb: 5 }}
@@ -40,7 +39,12 @@ const Aboutus = () => {
           in rural India and driven by innovation, we’re building a trusted
           digital ecosystem for a self-reliant farming future.
         </Typography>
-
+        <Typography
+          variant="h3"
+          sx={{ fontWeight: "bold", mb: 2, color: "#2e7d32" }}
+        >
+          Our Team
+        </Typography>
         <Stack
           direction="row"
           spacing={4}

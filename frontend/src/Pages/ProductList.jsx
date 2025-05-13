@@ -1,49 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { useEffect } from "react";
-
-const dummyProducts = [
-  {
-    id: 1,
-    name: "Organic Tomatoes",
-    price: 30,
-    image: "src/assets/tomatoes.jpeg",
-  },
-  { id: 2, name: "Fresh Wheat", price: 40, image: "src/assets/wheat.jpeg" },
-  { id: 3, name: "Kashmiri Apples", price: 50, image: "src/assets/apple.jpeg" },
-  { id: 4, name: "Cucumber", price: 20, image: "src/assets/cucumber.jpeg" },
-  { id: 5, name: "Fresh Milk", price: 45, image: "src/assets/milk.jpeg" },
-  {
-    id: 6,
-    name: "Juicy Strawberry",
-    price: 60,
-    image: "src/assets/strawberry.jpeg",
-  },
-  { id: 7, name: "Green Elichi", price: 35, image: "src/assets/elichi.jpeg" },
-  { id: 8, name: "Butter", price: 120, image: "src/assets/butter.jpeg" },
-  { id: 9, name: "Brinjal", price: 10, image: "src/assets/brinjal.jpeg" },
-];
+import api from "../../api.js";
 
 function ProductList() {
   const dispatch = useDispatch();
   const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await api.get("/products");
+      setProducts(response.data);
+    } catch (err) {
+      console.error("Error fetching products:", err);
+      alert(`Error fetching products: ${err.message}`);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    fetchProducts();
   }, []);
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = async (product) => {
+    if (!product._id) {
+      console.error("Product ID is missing");
+      return;
+    }
     dispatch(
       addToCart({
-        id: product.id,
+        id: product._id,
         name: product.name,
         price: product.price,
       })
     );
     setOpenSnackBar(true);
+    try {
+      await api.post("/cart", {
+        productId: product._id,
+        qty: 1,
+      });
+    } catch (err) {
+      console.error("Added into cart:", err.response?.data || err.message);
+    }
   };
 
   const handleClose = () => {
@@ -79,9 +81,10 @@ function ProductList() {
       >
         Our Fresh Products
       </h2>
+
       <div className="row">
-        {dummyProducts.map((product) => (
-          <div className="col-md-4 mb-4" key={product.id}>
+        {products.map((product) => (
+          <div className="col-md-4 mb-4" key={product._id}>
             <div
               className="card h-100 shadow-lg border-0"
               style={{

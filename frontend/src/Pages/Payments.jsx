@@ -23,6 +23,7 @@ function Payment() {
   const [upiId, setUpiId] = useState("");
 
   const cartItems = useSelector((state) => state.cart.items);
+  const loggedIn = !!localStorage.getItem("token");
 
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
@@ -86,7 +87,11 @@ function Payment() {
     );
 
     window.dispatchEvent(new Event("clearCart"));
-    window.location.href = "/orders";
+    if (loggedIn) {
+      window.location.href = "/Orders";
+    } else {
+      window.location.href = "/Register";
+    }
   };
 
   return (

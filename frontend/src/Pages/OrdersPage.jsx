@@ -64,7 +64,17 @@ const OrdersPage = () => {
               <td>{order.product_name}</td>
               <td>{order.quantity}</td>
               <td>₹{order.total_price}</td>
-              <td>{new Date(order.order_date).toLocaleDateString()}</td>
+              <td>
+                {new Date(order.order_date).toLocaleString("en-US", {
+                  weekday: "short", 
+                  year: "numeric", 
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric", 
+                  second: "numeric", 
+                })}
+              </td>
             </tr>
           ))}
         </tbody>
