@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { AppBar } from "@mui/material";
+import { AppBar, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
+import UserAvatarMenu from "../components/UserAvatarMenu";
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const loggedIn = !!localStorage.getItem("token");
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
@@ -41,7 +41,7 @@ function Navbar() {
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
             {[
-              { label: "Home", to: "/" },
+              { label: "Explore Products", to: "/products" },
               { label: "About", to: "/About" },
               { label: "Products", to: "/products" },
               { label: "Orders", to: "/Orders" },
@@ -76,32 +76,35 @@ function Navbar() {
                 <ShoppingCartIcon />
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link text-white fw-semibold"
-                to="/login"
-                onClick={() => setIsOpen(false)}
-                style={{
-                  fontSize: "1.05rem",
-                  transition: "0.3s",
-                }}
-              >
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link text-white fw-semibold"
-                to="/register"
-                onClick={() => setIsOpen(false)}
-                style={{
-                  fontSize: "1.05rem",
-                  transition: "0.3s",
-                }}
-              >
-                Register
-              </Link>
-            </li>
+            <Stack direction={"row"}>
+              <li className="nav-item">
+                <Link
+                  className="nav-link text-white fw-semibold"
+                  to="/login"
+                  onClick={() => setIsOpen(false)}
+                  style={{
+                    fontSize: "1.05rem",
+                    transition: "0.3s",
+                  }}
+                >
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link text-white fw-semibold"
+                  to="/register"
+                  onClick={() => setIsOpen(false)}
+                  style={{
+                    fontSize: "1.05rem",
+                    transition: "0.3s",
+                  }}
+                >
+                  Register
+                </Link>
+              </li>
+            </Stack>
+            {loggedIn && <UserAvatarMenu />}
           </ul>
         </div>
       </nav>

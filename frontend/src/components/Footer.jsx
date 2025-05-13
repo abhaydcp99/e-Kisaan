@@ -150,7 +150,8 @@ function Footer() {
         borderTop="1px solid rgba(255,255,255,0.2)"
       >
         <Typography variant="body2">
-          © {new Date().getFullYear()} e-Kisaan Portal. All rights reserved.
+          © {new Date().getFullYear()} e-Kisaan Portal. All rights reserved
+          ©AbhaysinhDCP.
         </Typography>
       </Box>
     </Box>

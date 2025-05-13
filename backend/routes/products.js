@@ -6,7 +6,7 @@ const router  = express.Router();
 // @route   POST /api/products
 // @desc    Create a new product
 // @access  Private (farmer/producer)
-router.post('/', auth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { name, description, price, category, imageUrl } = req.body;
     if (!name || !price || !category) {
